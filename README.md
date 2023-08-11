@@ -20,4 +20,4 @@ Here are some ideas to get you started:
 ![Dankang's GitHub stats](https://github-readme-stats.vercel.app/api?username=DankangE&show_icons=true&theme=transparent)
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=DankangE&layout=compact)](https://github.com/DankangE/github-readme-stats)
 
-<img src="https://img.shields.io/badge/Tistory-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
+<img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black">
