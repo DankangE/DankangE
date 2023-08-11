@@ -1,7 +1,6 @@
 ![header](https://capsule-render.vercel.app/api?type=slice&text=DankangE&fontColor=34495E&color=85C1E9&fontSize=50)
-![header](https://capsule-render.vercel.app/api?text=Hello%World!&fontAlignY=20)
-![header](https://capsule-render.vercel.app/api?text=Hello%World!&fontAlign=70)
-### Hi there 👋
+
+### Welcome to DankangE House 👋
 
 <!--
 **DankangE/DankangE** is a ✨ _special_ ✨ repository because its `README.md` (this file) appears on your GitHub profile.
