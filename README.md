@@ -1,5 +1,6 @@
-![header](https://capsule-render.vercel.app/api?type=slice&text=DankangE&fontColor=34495E&color=85C1E9&fontSize=50)
+![header](https://capsule-render.vercel.app/api?type=slice&text=DankangE&fontColor=34495E&color=85C1E9&fontSize=60)
 
+<br><br>
 ### Welcome to DankangE House 👋
 
 <!--
