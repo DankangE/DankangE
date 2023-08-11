@@ -17,3 +17,10 @@ Here are some ideas to get you started:
 
 ![Dankang's GitHub stats](https://github-readme-stats.vercel.app/api?username=DankangE&show_icons=true&theme=radical)
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=DankangE&layout=compact)](https://github.com/DankangE/github-readme-stats)
+
+<a href="https://github.com/DankangE/github-readme-stats">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=DankangE&repo=github-readme-stats" />
+</a>
+<a href="https://github.com/DankangE/convoychat">
+  <img align="center" src="https://github-readme-stats.vercel.app/api/pin/?username=DankangE&repo=convoychat" />
+</a>
