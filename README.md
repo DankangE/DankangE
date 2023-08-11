@@ -16,5 +16,4 @@ Here are some ideas to get you started:
 -->
 
 ![Dankang's GitHub stats](https://github-readme-stats.vercel.app/api?username=DankangE&show_icons=true&theme=radical)
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=DankangE)](https://github.com/DankangE/github-readme-stats)
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=DankangE&layout=compact)](https://github.com/DankangE/github-readme-stats)
