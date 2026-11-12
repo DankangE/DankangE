@@ -6,12 +6,6 @@
     <img alt="DankangE. 지도 위 비행 경로에 2023년 Java, Python부터 2026년 AI agents까지 여섯 개의 경유지가 찍혀 있고, 드론이 그 경로를 따라 납니다." src="assets/header-wide-light.svg" width="100%">
   </picture>
 </p>
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://readme-typing-svg.demolab.com?font=Noto+Sans+KR&amp;weight=500&amp;size=20&amp;duration=2600&amp;pause=1100&amp;vCenter=true&amp;width=420&amp;height=36&amp;lines=%EC%9B%B9+%EC%84%9C%EB%B9%84%EC%8A%A4%EB%A5%BC+%EB%A7%8C%EB%93%AD%EB%8B%88%EB%8B%A4;Building+web+services;%EC%A7%80%EB%8F%84+%EC%9C%84%EC%97%90+%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC+%EC%98%AC%EB%A6%BD%EB%8B%88%EB%8B%A4;Putting+data+on+maps;AI+%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8%EC%99%80+%ED%95%A8%EA%BB%98+%EA%B0%9C%EB%B0%9C%ED%95%A9%EB%8B%88%EB%8B%A4;Shipping+with+AI+agents&amp;color=6FA0FF">
-    <img alt="웹 서비스를 만듭니다. 지도 위에 데이터를 올립니다. AI 에이전트와 함께 개발합니다." src="https://readme-typing-svg.demolab.com?font=Noto+Sans+KR&amp;weight=500&amp;size=20&amp;duration=2600&amp;pause=1100&amp;vCenter=true&amp;width=420&amp;height=36&amp;lines=%EC%9B%B9+%EC%84%9C%EB%B9%84%EC%8A%A4%EB%A5%BC+%EB%A7%8C%EB%93%AD%EB%8B%88%EB%8B%A4;Building+web+services;%EC%A7%80%EB%8F%84+%EC%9C%84%EC%97%90+%EB%8D%B0%EC%9D%B4%ED%84%B0%EB%A5%BC+%EC%98%AC%EB%A6%BD%EB%8B%88%EB%8B%A4;Putting+data+on+maps;AI+%EC%97%90%EC%9D%B4%EC%A0%84%ED%8A%B8%EC%99%80+%ED%95%A8%EA%BB%98+%EA%B0%9C%EB%B0%9C%ED%95%A9%EB%8B%88%EB%8B%A4;Shipping+with+AI+agents&amp;color=2F6FDE">
-  </picture>
-</p>
 
 안녕하세요, 단강입니다. TypeScript와 React로 웹 서비스를 만들고, 지도 위에 데이터를 올리는 화면을 좋아합니다. 요즘은 AI 에이전트 여러 대와 편대를 짜서 개발합니다.<br>
 Hi, I'm Dankang. I build web services with TypeScript and React, I like putting data on maps, and these days I fly in formation with AI agents.
