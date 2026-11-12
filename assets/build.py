@@ -1,9 +1,12 @@
-"""Builds the profile header SVGs: a flight path over a contour map whose
-waypoints are the stacks in the public repos, in the order they were picked up.
+"""Builds the profile SVGs, each as {wide,narrow} x {light,dark}:
 
-    python3 assets/build_header.py
+- header-*: a flight path over a contour map whose waypoints are the stacks
+  picked up over the years, with a drone that keeps flying the route;
+- status-*, telemetry-*: head-up-display strips.
 
-Writes header-{wide,narrow}-{light,dark}.svg next to this file.
+    python3 assets/build.py
+
+Motion stops under prefers-reduced-motion.
 """
 import math
 from pathlib import Path
@@ -14,6 +17,7 @@ WAYPOINTS = [
     ("2025", "Next.js"),
     ("2025", "OpenLayers GIS"),
     ("2026", "TypeScript SaaS"),
+    ("2026", "AI agents"),
 ]
 
 THEMES = {
@@ -26,19 +30,43 @@ THEMES = {
 LAYOUTS = {
     "wide": dict(
         w=1200, h=360, title=(64, 118, 76), sub=(66, 160, 23),
-        points=[(120, 286), (340, 232), (570, 288), (810, 196), (1030, 128)],
-        end=(1128, 74), label="below", year=20, text=19, drone=1.0,
+        points=[(110, 284), (290, 236), (480, 284), (680, 226), (870, 162), (1040, 112)],
+        end=(1132, 62), label="below", year=20, text=19, drone=1.0,
         hills=[(930, 250, 300, 150), (250, 330, 260, 120), (620, 40, 240, 90)],
     ),
     "narrow": dict(
-        w=640, h=660, title=(44, 108, 68), sub=(46, 152, 24),
-        points=[(110, 250), (250, 330), (130, 410), (270, 490), (150, 570)],
-        end=(330, 622), label="right", year=27, text=27, drone=1.15,
-        hills=[(520, 330, 230, 190), (90, 620, 200, 120), (560, 60, 180, 90)],
+        w=640, h=740, title=(44, 108, 68), sub=(46, 152, 24),
+        points=[(110, 250), (250, 330), (130, 410), (270, 490), (150, 570), (290, 650)],
+        end=(470, 700), label="right", year=27, text=27, drone=1.15,
+        hills=[(520, 330, 230, 190), (90, 700, 200, 120), (560, 60, 180, 90)],
     ),
 }
 
 FONT = "'Avenir Next','Segoe UI','Helvetica Neue',Arial,sans-serif"
+
+STRIPS = {
+    "status": ("NOW FLYING", "AI agents, TypeScript, maps", True),
+    "telemetry": ("TELEMETRY", "live from GitHub", False),
+}
+STRIP_SIZES = {"wide": (1200, 48, 18), "narrow": (640, 60, 23)}
+
+MOTION = (
+    "<style>.still{display:none}"
+    ".pulse{transform-box:fill-box;transform-origin:center;animation:pulse 3.2s ease-out infinite}"
+    ".blink{animation:blink 1.6s steps(1) infinite}"
+    "@keyframes pulse{0%{transform:scale(1);opacity:.9}70%,100%{transform:scale(2.6);opacity:0}}"
+    "@keyframes blink{50%{opacity:.25}}"
+    "@media (prefers-reduced-motion:reduce){.fly{display:none}.still{display:inline}"
+    ".pulse{animation:none;opacity:0}.blink{animation:none}}</style>"
+)
+
+
+def brackets(c, w, h, inset, size):
+    """Four corner brackets, the frame of a head-up display."""
+    a, b, x, y = inset, inset + size, w - inset, h - inset
+    d = (f"M{a},{b} V{a} H{b} M{x - size},{a} H{x} V{b} "
+         f"M{x},{y - size} V{y} H{x - size} M{b},{y} H{a} V{y - size}")
+    return f'<path d="{d}" fill="none" stroke="{c["soft"]}" stroke-width="2" stroke-linecap="round"/>'
 
 
 def contour(cx, cy, rx, ry, scale, seed):
@@ -77,9 +105,9 @@ def build(layout, theme):
     route = smooth(L["points"] + [L["end"]])
     out = [
         f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}" role="img" '
-        f'aria-label="DankangE. A flight path over a contour map with five waypoints: '
+        f'aria-label="DankangE. A flight path over a contour map with six waypoints: '
         + "; ".join(f"{y} {t}" for y, t in WAYPOINTS) + '.">',
-        "<style>.still{display:none}@media (prefers-reduced-motion:reduce){.fly{display:none}.still{display:inline}}</style>",
+        MOTION,
         f'<clipPath id="card"><rect width="{w}" height="{h}" rx="20"/></clipPath>',
         f'<g clip-path="url(#card)"><rect width="{w}" height="{h}" fill="{c["bg"]}"/>',
         f'<g fill="none" stroke="{c["contour"]}" stroke-width="1.5">',
@@ -90,7 +118,10 @@ def build(layout, theme):
     out.append("</g>")
     out.append(f'<path id="route" d="{route}" fill="none" stroke="{c["path"]}" stroke-width="3" '
                f'stroke-dasharray="2 11" stroke-linecap="round"/>')
-    for (x, y), (year, text) in zip(L["points"], WAYPOINTS):
+    out.append(brackets(c, w, h, 18, 22))
+    for n, ((x, y), (year, text)) in enumerate(zip(L["points"], WAYPOINTS)):
+        out.append(f'<circle class="pulse" style="animation-delay:{n * 0.5:.1f}s" cx="{x}" cy="{y}" r="13" '
+                   f'fill="none" stroke="{c["point"]}" stroke-width="2"/>')
         out.append(f'<circle cx="{x}" cy="{y}" r="13" fill="{c["bg"]}" stroke="{c["point"]}" stroke-width="3"/>'
                    f'<circle cx="{x}" cy="{y}" r="5" fill="{c["point"]}"/>')
         if L["label"] == "below":
@@ -103,8 +134,11 @@ def build(layout, theme):
                        f'<tspan font-weight="700" fill="{c["ink"]}">{year}</tspan>  {text}</text>')
     ex, ey = L["end"]
     out.append(f'<g class="still" transform="translate({ex},{ey})">{drone(c, L["drone"])}</g>')
-    out.append(f'<g class="fly">{drone(c, L["drone"])}<animateMotion dur="9s" begin="0.4s" fill="freeze" '
-               f'calcMode="spline" keyTimes="0;1" keySplines="0.4 0 0.2 1"><mpath href="#route"/></animateMotion></g>')
+    out.append(f'<g class="fly">{drone(c, L["drone"])}'
+               f'<animateMotion dur="16s" repeatCount="indefinite" calcMode="linear" keyPoints="0;1;1" '
+               f'keyTimes="0;0.86;1"><mpath href="#route"/></animateMotion>'
+               f'<animate attributeName="opacity" dur="16s" repeatCount="indefinite" values="0;1;1;0" '
+               f'keyTimes="0;0.04;0.95;1"/></g>')
     tx, ty, ts = L["title"]
     sx, sy, ss = L["sub"]
     out.append(f'<text x="{tx}" y="{ty}" font-family="{FONT}" font-size="{ts}" font-weight="800" '
@@ -115,8 +149,33 @@ def build(layout, theme):
     return "\n".join(out) + "\n"
 
 
+def strip(name, size, theme):
+    (label, detail, live), (w, h, fs), c = STRIPS[name], STRIP_SIZES[size], THEMES[theme]
+    mid, x = h / 2, 34
+    out = [f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {w} {h}" width="{w}" height="{h}" role="img" '
+           f'aria-label="{label}: {detail}">', MOTION,
+           f'<rect width="{w}" height="{h}" rx="10" fill="{c["bg"]}"/>', brackets(c, w, h, 8, 10)]
+    if live:
+        out.append(f'<circle class="pulse" cx="{x + 6}" cy="{mid}" r="6" fill="none" stroke="{c["point"]}" stroke-width="2"/>'
+                   f'<circle class="blink" cx="{x + 6}" cy="{mid}" r="6" fill="{c["point"]}"/>')
+        x += 28
+    label_w = len(label) * fs * 0.74
+    out.append(f'<text x="{x}" y="{mid + fs * 0.35:.1f}" font-family="{FONT}" font-size="{fs}" font-weight="700" '
+               f'letter-spacing="1.5" fill="{c["ink"]}">{label}</text>'
+               f'<text x="{x + label_w + 14:.0f}" y="{mid + fs * 0.35:.1f}" font-family="{FONT}" font-size="{fs}" '
+               f'fill="{c["soft"]}">{detail}</text>')
+    start = x + label_w + 14 + len(detail) * fs * 0.52 + 24
+    ticks = "".join(f"M{t:.0f},{mid - (7 if i % 5 == 0 else 3)} V{mid + (7 if i % 5 == 0 else 3)} "
+                    for i, t in enumerate(range(int(start), w - 34, 12)))
+    out.append(f'<path d="{ticks}" stroke="{c["contour"]}" stroke-width="2" stroke-linecap="round"/></svg>')
+    return "\n".join(out) + "\n"
+
+
 if __name__ == "__main__":
     here = Path(__file__).parent
-    for layout in LAYOUTS:
-        for theme in THEMES:
+    for theme in THEMES:
+        for layout in LAYOUTS:
             (here / f"header-{layout}-{theme}.svg").write_text(build(layout, theme))
+        for name in STRIPS:
+            for size in STRIP_SIZES:
+                (here / f"{name}-{size}-{theme}.svg").write_text(strip(name, size, theme))

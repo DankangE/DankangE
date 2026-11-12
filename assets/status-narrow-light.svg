@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 60" width="640" height="60" role="img" aria-label="NOW FLYING: AI agents, TypeScript, maps">
+<style>.still{display:none}.pulse{transform-box:fill-box;transform-origin:center;animation:pulse 3.2s ease-out infinite}.blink{animation:blink 1.6s steps(1) infinite}@keyframes pulse{0%{transform:scale(1);opacity:.9}70%,100%{transform:scale(2.6);opacity:0}}@keyframes blink{50%{opacity:.25}}@media (prefers-reduced-motion:reduce){.fly{display:none}.still{display:inline}.pulse{animation:none;opacity:0}.blink{animation:none}}</style>
+<rect width="640" height="60" rx="10" fill="#EAF1F8"/>
+<path d="M8,18 V8 H18 M622,8 H632 V18 M632,42 V52 H622 M18,52 H8 V42" fill="none" stroke="#4A6077" stroke-width="2" stroke-linecap="round"/>
+<circle class="pulse" cx="40" cy="30.0" r="6" fill="none" stroke="#E8940C" stroke-width="2"/><circle class="blink" cx="40" cy="30.0" r="6" fill="#E8940C"/>
+<text x="62" y="38.0" font-family="'Avenir Next','Segoe UI','Helvetica Neue',Arial,sans-serif" font-size="23" font-weight="700" letter-spacing="1.5" fill="#12263A">NOW FLYING</text><text x="246" y="38.0" font-family="'Avenir Next','Segoe UI','Helvetica Neue',Arial,sans-serif" font-size="23" fill="#4A6077">AI agents, TypeScript, maps</text>
+<path d="M593,23.0 V37.0 M605,27.0 V33.0 " stroke="#C3D3E3" stroke-width="2" stroke-linecap="round"/></svg>
